@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>sso_test1</display-name>
+  <listener>
+  <listener-class>com.sso.client.listener.SSO_LogoutListener</listener-class>
+  </listener>
+     
+    <filter>
+   <filter-name>SingleLogoutFilter</filter-name>  
+        <filter-class>com.sso.client.filter.SingleLogoutFilter</filter-class>  
+        <init-param>
+        <param-name>serverLogoutUrl</param-name>
+        <param-value>http://localhost:8080/IDP/service/logout</param-value>
+        </init-param>
+  </filter>
+  <filter-mapping>  
+        <filter-name>SingleLogoutFilter</filter-name>  
+        <url-pattern>/logout</url-pattern>  
+    </filter-mapping>
+    <filter>  
+        <filter-name>UrlFilter</filter-name>  
+        <filter-class>com.sso.client.filter.URL_Filter</filter-class>  
+        <init-param>
+        <param-name>serverLoginUrl</param-name>
+        <param-value>http://localhost:8080/IDP/service/login</param-value>
+        </init-param>
+    </filter>  
+    <filter-mapping>  
+        <filter-name>UrlFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+   
+</web-app>
